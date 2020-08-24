@@ -46,6 +46,7 @@ class Callbacks
 
 
             }
+
         public function processB2CRequestCallback()
             {
                 $callbackJSONData	 				=	file_get_contents('php://input');
@@ -83,7 +84,8 @@ class Callbacks
 
 
             }
-        public function C2BRequestValidation()
+
+        public function processC2BRequestValidation()
             {
 
                 $callbackJSONData 	=	file_get_contents('php://input');
@@ -119,11 +121,12 @@ class Callbacks
                     "transactionType"	=>	$transactionType
                 );
 
-            
+
                return array("ResultCode"=>0,"ResultDesc"=>"Accepted");
-               
+
 
             }
+
         public function processC2BRequestConfirmation()
             {
                 $callbackJSONData 	=	file_get_contents('php://input');
@@ -158,10 +161,11 @@ class Callbacks
                                                     "transactionType"	=>	$transactionType
                                             );
 
-           
-               
+
+
                  return $result;
             }
+
         public function processAccountBalanceRequestCallback()
             {
                 $callbackJSONData=file_get_contents('php://input');
@@ -190,6 +194,7 @@ class Callbacks
 
 
             }
+
         public function processReversalRequestCallBack()
             {
 
@@ -214,6 +219,7 @@ class Callbacks
 
 
             }
+
         public function processSTKPushRequestCallback()
             {
                 $callbackJSONData=file_get_contents('php://input');
@@ -242,6 +248,7 @@ class Callbacks
 
 
             }
+
         public function processSTKPushQueryRequestCallback()
             {
                 $callbackJSONData 		=	file_get_contents('php://input');
@@ -264,6 +271,7 @@ class Callbacks
 
 
             }
+
         public function processTransactionStatusRequestCallback()
             {
                 $callbackJSONData=file_get_contents('php://input');
@@ -310,19 +318,7 @@ class Callbacks
 
                 return json_encode($result);
             }
-       
-           
-        public function postdata($url,$data)
-            {
-                $client = new \GuzzleHttp\Client();
-                foreach($url as $link)
-                    {
-                        $request = $client->post($link,  ['form_params'=>$data]);
 
-                    }
-
-
-            }
         public function curl_function($url, $param)
             {
                 Log::debug("Curl data : ".json_encode($param));
@@ -340,11 +336,7 @@ class Callbacks
                     }
                 return TRUE;
             }
-        public function add_numbers($name,$phone)
-            {
-                Phone_number::firstOrCreate(['phone_number'=>$phone],["customer_name"=>$name]);
-                return TRUE;
-            }
 
-        
+
+
     }
